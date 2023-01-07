@@ -27,3 +27,4 @@
 
   - PHP 画像のアップロード　https://qiita.com/ryo-futebol/items/11dea44c6b68203228ff
   - PHP ログイン　https://qiita.com/ryo-futebol/items/5fb635199acc2fcbd3ff
+  - MySQLの乱数　https://dev.mysql.com/doc/refman/5.6/ja/mathematical-functions.html
