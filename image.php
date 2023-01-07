@@ -33,7 +33,10 @@ try {
     $image_1 = $stmt_1->fetch();
 
     //ランダム表示 表示されたりされなかったり、なぜだ？
-    $sql_2 = "SELECT * FROM images WHERE user_name=:username and id = floor((SELECT MIN(id) FROM images WHERE user_name=:username)+rand()*5)" ;
+    //$sql_2 = "SELECT * FROM images WHERE user_name=:username and id = floor((SELECT MIN(id) FROM images WHERE user_name=:username)+rand()*)" ;
+    
+    //修正版
+    $sql_2 = "SELECT * FROM images WHERE id > (SELECT MIN(id) FROM IMAGES WHERE user_name=:username) and id < (SELECT MAX(id) FROM IMAGES WHERE user_name=:username) ORDER BY rand() LIMIT 1";
     $stmt_2 = $dbh->prepare($sql_2);
     $stmt_2->bindValue(':username', $username, PDO::PARAM_STR);
     $stmt_2->execute();
