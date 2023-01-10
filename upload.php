@@ -25,12 +25,14 @@ try {
         $image = uniqid(mt_rand(), true);//ファイル名をユニーク化
         $image .= '.' . substr(strrchr($_FILES['image']['name'], '.'), 1);//アップロードされたファイルの拡張子を取得
         $username = $_SESSION['name'];
+        $memo = $_POST['memo'];
         //var_dump($username);
         $file = "images/$image";
-        $sql = "INSERT INTO images(id,img_name,user_name) VALUES (NULL, :image, :username)";
+        $sql = "INSERT INTO images(id,img_name,user_name,memo) VALUES (NULL, :image, :username,:memo)";
         $stmt = $dbh->prepare($sql);
         $stmt->bindValue(':image', $image, PDO::PARAM_STR);
         $stmt->bindValue(':username', $username, PDO::PARAM_STR);
+        $stmt->bindValue(':memo', $memo, PDO::PARAM_STR);
         if (!empty($_FILES['image']['name'])) {//ファイルが選択されていれば$imageにファイル名を代入
             move_uploaded_file($_FILES['image']['tmp_name'], './images/' . $image);//imagesディレクトリにファイル保存
             if (exif_imagetype($file)) {//画像ファイルかのチェック
@@ -55,6 +57,7 @@ try {
     <form method="post" enctype="multipart/form-data">
         <p>アップロード画像</p>
         <input type="file" name="image">
+        <input type="test" name="memo">
         <button><input type="submit" name="upload" value="送信"></button>
     </form>
 <?php endif;?>
