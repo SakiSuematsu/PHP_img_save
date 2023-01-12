@@ -1,28 +1,7 @@
 <?php
-// include('functions.php');
-// $pdo = connect_to_db();
+include('functions.php');
+$pdo = connect_to_db();
 
-// $dbn = 'mysql:dbname=gsf_d12_15;charset=utf8mb4;port=3306;host=localhost';
-// $user = 'root';
-// $pwd = '';
-
-// try {
-//   $pdo = new PDO($dbn, $user, $pwd);
-// } catch (PDOException $e) {
-//   echo json_encode(["db error" => "{$e->getMessage()}"]);
-//   exit();
-// }
-
-
-$dbn ='mysql:dbname=img_save;charset=utf8mb4;port=3306;host=localhost';
-$user = 'root';
-$pwd = '';
-
-try {
-    $pdo = new PDO($dbn, $user, $pwd);
-} catch (PDOException $e) {
-    echo $e->getMessage();
-}
 //セッションスタート
 session_start();
 $username = $_SESSION['name'];
@@ -34,9 +13,10 @@ if (isset($_SESSION['id'])) {//ログインしているとき
     $link = '<a href="login.php">ログイン</a>';
 }
 
-$sql = 'SELECT * FROM images' ;
+$sql = 'SELECT * FROM images WHERE user_name=:username order by id' ;
 
 $stmt = $pdo->prepare($sql);
+$stmt->bindValue(':username', $username, PDO::PARAM_STR);
 
 try {
   $status = $stmt->execute();
@@ -51,13 +31,13 @@ $output = "";
 foreach ($result as $record) {
   $output .= "
     <tr>
-      <td><img src="images/{$record["img_name"]}>" width="150" height="200"></td> 
+      <td><img src=\"images/{$record["img_name"]}\" style= \"width: 150px;height: auto;\"></td> 
       <td>{$record["memo"]}</td>
        <td>
-        <a href='todo_edit.php?id={$record["id"]}'>edit</a>
+        <a href='image_edit.php?id={$record["id"]}'>edit</a>
       </td>
       <td>
-        <a href='todo_delete.php?id={$record["id"]}'>delete</a>
+        <a href='image_delete.php?id={$record["id"]}'>delete</a>
       </td>
     </tr>
   ";
@@ -78,7 +58,7 @@ foreach ($result as $record) {
   <h2><?php echo $msg; ?></h2>
   <fieldset>
     <legend>画像登録（一覧画面）</legend>
-    <a href="update.php">画像アップロード</a>
+    <a href="upload.php">画像アップロード</a>
     <table>
       <thead>
         <tr>

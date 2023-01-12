@@ -1,4 +1,8 @@
 <?php
+include('functions.php');
+$pdo = connect_to_db();
+
+//セッションスタート
 session_start();
 $username = $_SESSION['name'];
 //var_dump($username);
@@ -10,17 +14,16 @@ if (isset($_SESSION['id'])) {//ログインしているとき
     $link = '<a href="login.php">ログイン</a>';
 }
 
+// $dbn ='mysql:dbname=img_save;charset=utf8mb4;port=3306;host=localhost';
+// $user = 'root';
+// $pwd = '';
 
-$dbn ='mysql:dbname=img_save;charset=utf8mb4;port=3306;host=localhost';
-$user = 'root';
-$pwd = '';
-
-//DB接続
-try {
-    $dbh = new PDO($dbn, $user, $pwd);
-} catch (PDOException $e) {
-    echo $e->getMessage();
-}
+// //DB接続
+// try {
+//     $dbh = new PDO($dbn, $user, $pwd);
+// } catch (PDOException $e) {
+//     echo $e->getMessage();
+// }
     if (isset($_POST['upload'])) {//送信ボタンが押された場合
         $image = uniqid(mt_rand(), true);//ファイル名をユニーク化
         $image .= '.' . substr(strrchr($_FILES['image']['name'], '.'), 1);//アップロードされたファイルの拡張子を取得
@@ -29,7 +32,7 @@ try {
         //var_dump($username);
         $file = "images/$image";
         $sql = "INSERT INTO images(id,img_name,user_name,memo) VALUES (NULL, :image, :username,:memo)";
-        $stmt = $dbh->prepare($sql);
+        $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':image', $image, PDO::PARAM_STR);
         $stmt->bindValue(':username', $username, PDO::PARAM_STR);
         $stmt->bindValue(':memo', $memo, PDO::PARAM_STR);
@@ -52,7 +55,7 @@ try {
 <!--送信ボタンが押された場合-->
 <?php if (isset($_POST['upload'])): ?>
     <p><?php echo $message; ?></p>
-    <p><a href="image.php">画像表示へ</a></p>
+    <p><a href="image2.php">画像表示へ</a></p>
 <?php else: ?>
     <form method="post" enctype="multipart/form-data">
         <p>アップロード画像</p>

@@ -3,7 +3,7 @@
 function connect_to_db()
 {
     // DB接続
-$dbn ='mysql:dbname=gsf_d12_15;charset=utf8mb4;port=3306;host=localhost';
+$dbn ='mysql:dbname=img_save;charset=utf8mb4;port=3306;host=localhost';
 $user = 'root';
 $pwd = '';
 
@@ -15,3 +15,4 @@ try {
   exit();
 }
 }
+

@@ -1,20 +1,23 @@
 <?php
+include('functions.php');
+$pdo = connect_to_db();
+
 //フォームからの値をそれぞれ変数に代入
 $username = $_POST['username'];
 $mail = $_POST['mail'];
 $pass = password_hash($_POST['pass'], PASSWORD_DEFAULT);
-$dbn ='mysql:dbname=img_save;charset=utf8mb4;port=3306;host=localhost';
-$user = 'root';
-$pwd = '';
-try {
-    $dbh = new PDO($dbn, $user, $pwd);
-} catch (PDOException $e) {
-    $msg = $e->getMessage();
-}
+// $dbn ='mysql:dbname=img_save;charset=utf8mb4;port=3306;host=localhost';
+// $user = 'root';
+// $pwd = '';
+// try {
+//     $dbh = new PDO($dbn, $user, $pwd);
+// } catch (PDOException $e) {
+//     $msg = $e->getMessage();
+// }
 
 //フォームに入力されたmailがすでに登録されていないかチェック
 $sql = "SELECT * FROM users WHERE mail = :mail";
-$stmt = $dbh->prepare($sql);
+$stmt = $pdo->prepare($sql);
 $stmt->bindValue(':mail', $mail);
 $stmt->execute();
 $member = $stmt->fetch();
@@ -24,7 +27,7 @@ if ($member['mail'] === $mail) {
 } else {
     //登録されていなければinsert 
     $sql = "INSERT INTO users(name, mail, pass) VALUES (:username, :mail, :pass)";
-    $stmt = $dbh->prepare($sql);
+    $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':username', $username);
     $stmt->bindValue(':mail', $mail);
     $stmt->bindValue(':pass', $pass);
