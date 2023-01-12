@@ -16,6 +16,8 @@
   - ユーザーと画像を紐つけるようDBにテーブルを準備
   - ~~画像表示を３枠作って、一番新しいものと一番古いものとランダムを表示させるようにした~~
   - 画像表示画面には登録したすべての画像を表示するよう変更
+  - 削除ボタンの実装
+  - 編集ボタンの実装
 
 ## 苦戦した点
 
@@ -25,9 +27,12 @@
   - でもPHPのエラーはそんなに苦戦しなくなってきた！
   - 画像のランダム表示が時々うまく読み込めていないようなので要修正→修正完了！
   - エスケープ文字を思い出すまでに時間がかかった（ダブルクオーテーションを文字列認識させたかった）
+  - 編集ボタンの実装に苦戦した。
+  - グローバル変数$_FILESを使うときは、formタグにenctype="multipart/form-data"が必要！大事！！
 
 ## 参考にした web サイトなど
 
   - PHP 画像のアップロード　https://qiita.com/ryo-futebol/items/11dea44c6b68203228ff
   - PHP ログイン　https://qiita.com/ryo-futebol/items/5fb635199acc2fcbd3ff
   - MySQLの乱数　https://dev.mysql.com/doc/refman/5.6/ja/mathematical-functions.html
+  - グローバル変数　$_FILES　https://webukatu.com/wordpress/blog/20969/

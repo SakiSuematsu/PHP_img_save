@@ -42,7 +42,7 @@ $record = $stmt->fetch(PDO::FETCH_ASSOC);
 
 <body>
   <h2><?php echo $msg; ?></h2>
-  <form action="image_update.php" method="POST">
+  <form action="image_update.php" method="post" enctype="multipart/form-data" >
   <fieldset>
     <legend>画像登録（編集画面）</legend>
     <a href="image2.php">画像画像一覧</a>
