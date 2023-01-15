@@ -1,5 +1,8 @@
 <?php
+//セッションスタート
 session_start();
+// ログイン状態のチェック関数
+check_session_id();
 $username = $_SESSION['name'];
 if (isset($_SESSION['id'])) {//ログインしているとき
     $msg =  htmlspecialchars($username, \ENT_QUOTES, 'UTF-8') . 'さんの登録した画像です';
@@ -33,7 +36,7 @@ try {
     $image_1 = $stmt_1->fetch();
 
     //ランダム表示 表示されたりされなかったり、なぜだ？
-    //$sql_2 = "SELECT * FROM images WHERE user_name=:username and id = floor((SELECT MIN(id) FROM images WHERE user_name=:username)+rand()*)" ;
+    //$sql_2 = "SELECT * FROM images WHERE user_name=:username and id = floor((SELECT MIN(id) FROM images WHERE user_name=:username)+rand()*3)" ;
     
     //修正版
     $sql_2 = "SELECT * FROM images WHERE id > (SELECT MIN(id) FROM IMAGES WHERE user_name=:username) and id < (SELECT MAX(id) FROM IMAGES WHERE user_name=:username) ORDER BY rand() LIMIT 1";

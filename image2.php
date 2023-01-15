@@ -4,6 +4,9 @@ $pdo = connect_to_db();
 
 //セッションスタート
 session_start();
+// ログイン状態のチェック関数
+check_session_id();
+
 $username = $_SESSION['name'];
 if (isset($_SESSION['id'])) {//ログインしているとき
     $msg =  htmlspecialchars($username, \ENT_QUOTES, 'UTF-8') . 'さんの登録した画像です';

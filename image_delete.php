@@ -1,10 +1,16 @@
 <?php
-$id = $_GET['id'];
-
 include('functions.php');
+
+//セッションスタート
+session_start();
+// ログイン状態のチェック関数
+check_session_id();
+
+$id = $_GET['id'];
 $pdo = connect_to_db();
 
-$sql = 'DELETE FROM images WHERE id=:id';
+//物理削除　後で論理削除に作り直し
+$sql = 'DELETE FROM images WHERE id=:id'; 
 
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':id', $id, PDO::PARAM_STR);

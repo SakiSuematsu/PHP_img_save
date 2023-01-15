@@ -4,6 +4,9 @@ $pdo = connect_to_db();
 
 //セッションスタート
 session_start();
+// ログイン状態のチェック関数
+check_session_id();
+
 $username = $_SESSION['name'];
 
 // 入力項目のチェック

@@ -29,10 +29,12 @@
   - エスケープ文字を思い出すまでに時間がかかった（ダブルクオーテーションを文字列認識させたかった）
   - 編集ボタンの実装に苦戦した。
   - グローバル変数$_FILESを使うときは、formタグにenctype="multipart/form-data"が必要！大事！！
+  - 編集画面、画像とメモの両方をinputしてないと更新されない！！どちらかだけの更新もできるよう、要修正！
 
 ## 参考にした web サイトなど
 
   - PHP 画像のアップロード　https://qiita.com/ryo-futebol/items/11dea44c6b68203228ff
   - PHP ログイン　https://qiita.com/ryo-futebol/items/5fb635199acc2fcbd3ff
   - MySQLの乱数　https://dev.mysql.com/doc/refman/5.6/ja/mathematical-functions.html
+  - rand()　https://atsuizo.hatenadiary.jp/entry/2020/12/04/090000
   - グローバル変数　$_FILES　https://webukatu.com/wordpress/blog/20969/

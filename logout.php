@@ -1,7 +1,16 @@
 <?php
 session_start();
-$_SESSION = array();//セッションの中身をすべて削除
-session_destroy();//セッションを破壊
+
+//セッションの中身をすべて削除
+$_SESSION = array();
+
+// ブラウザに保存した情報の有効期限を操作
+if (isset($_COOKIE[session_name()])) {
+  setcookie(session_name(), '', time() - 42000, '/');
+}
+
+//セッションを破壊
+session_destroy();
 ?>
 
 <p>ログアウトしました。</p>

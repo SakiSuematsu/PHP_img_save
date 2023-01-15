@@ -4,26 +4,20 @@ $pdo = connect_to_db();
 
 //セッションスタート
 session_start();
+// ログイン状態のチェック関数
+// check_session_id();
+
 $username = $_SESSION['name'];
 //var_dump($username);
 if (isset($_SESSION['id'])) {//ログインしているとき
     $msg = 'こんにちは' . htmlspecialchars($username, \ENT_QUOTES, 'UTF-8') . 'さん';
-    $link = '<a href="logout.php">ログアウト</a>';
+    $link_1 = '<a href="logout.php">ログアウト</a>';
+    $link_2 = '<a href="image2.php">画像一覧</a>';
 } else {//ログインしていない時
     $msg = 'ログインしていません';
     $link = '<a href="login.php">ログイン</a>';
 }
 
-// $dbn ='mysql:dbname=img_save;charset=utf8mb4;port=3306;host=localhost';
-// $user = 'root';
-// $pwd = '';
-
-// //DB接続
-// try {
-//     $dbh = new PDO($dbn, $user, $pwd);
-// } catch (PDOException $e) {
-//     echo $e->getMessage();
-// }
     if (isset($_POST['upload'])) {//送信ボタンが押された場合
         $image = uniqid(mt_rand(), true);//ファイル名をユニーク化
         $image .= '.' . substr(strrchr($_FILES['image']['name'], '.'), 1);//アップロードされたファイルの拡張子を取得
@@ -51,7 +45,7 @@ if (isset($_SESSION['id'])) {//ログインしているとき
 
 <h1>画像アップロード</h1>
 <h2><?php echo $msg; ?></h2>
-<?php echo $link; ?>
+<p><?php echo $link_1 ; ?></p>
 <!--送信ボタンが押された場合-->
 <?php if (isset($_POST['upload'])): ?>
     <p><?php echo $message; ?></p>
@@ -63,4 +57,5 @@ if (isset($_SESSION['id'])) {//ログインしているとき
         <input type="test" name="memo">
         <button><input type="submit" name="upload" value="送信"></button>
     </form>
+<p><?php echo $link_2 ; ?></p>
 <?php endif;?>
