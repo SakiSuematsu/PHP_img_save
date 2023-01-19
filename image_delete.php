@@ -10,7 +10,10 @@ $id = $_GET['id'];
 $pdo = connect_to_db();
 
 //物理削除　後で論理削除に作り直し
-$sql = 'DELETE FROM images WHERE id=:id'; 
+//$sql = 'DELETE FROM images WHERE id=:id'; 
+
+//論理削除
+$sql = 'UPDATE images SET deleted_at = now() WHERE id=:id';
 
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':id', $id, PDO::PARAM_STR);

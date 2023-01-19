@@ -16,7 +16,7 @@ if (isset($_SESSION['id'])) {//ログインしているとき
     $link = '<a href="login.php">ログイン</a>';
 }
 
-$sql = 'SELECT * FROM images WHERE user_name=:username order by id' ;
+$sql = 'SELECT * FROM images WHERE user_name=:username AND deleted_at IS NULL ORDER BY id' ;
 
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':username', $username, PDO::PARAM_STR);

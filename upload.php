@@ -25,7 +25,7 @@ if (isset($_SESSION['id'])) {//ログインしているとき
         $memo = $_POST['memo'];
         //var_dump($username);
         $file = "images/$image";
-        $sql = "INSERT INTO images(id,img_name,user_name,memo) VALUES (NULL, :image, :username,:memo)";
+        $sql = "INSERT INTO images(id,img_name,user_name,memo,created_at,updated_at,deleted_at) VALUES (NULL, :image, :username,:memo,now(),now(),NULL)";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':image', $image, PDO::PARAM_STR);
         $stmt->bindValue(':username', $username, PDO::PARAM_STR);

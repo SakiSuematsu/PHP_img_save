@@ -18,7 +18,7 @@ if ($member['mail'] === $mail) {
     $link = '<a href="signup.php">戻る</a>';
 } else {
     //登録されていなければinsert 
-    $sql = "INSERT INTO users(name, mail, pass) VALUES (:username, :mail, :pass)";
+    $sql = "INSERT INTO users(name, mail, pass, is_admin, created_at, updated_at, deleted_at) VALUES (:username, :mail, :pass, 0, now(), now(), NULL)";
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':username', $username);
     $stmt->bindValue(':mail', $mail);

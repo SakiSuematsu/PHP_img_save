@@ -25,7 +25,7 @@ if (isset($_POST['update'])) {//送信ボタンが押された場合
         $file = "images/$image";
         $memo = $_POST['memo'];
         $id = $_POST['id'];
-        $sql = "UPDATE images SET img_name = :image , memo= :memo WHERE id=:id";
+        $sql = "UPDATE images SET img_name = :image , memo= :memo , updated_at = now() WHERE id=:id";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':id', $id, PDO::PARAM_STR);
         $stmt->bindValue(':image', $image, PDO::PARAM_STR);
