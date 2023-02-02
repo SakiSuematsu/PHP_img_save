@@ -10,6 +10,7 @@ check_session_id();
 $username = $_SESSION['name'];
 if (isset($_SESSION['id'])) {//ログインしているとき
     $msg =  htmlspecialchars($username, \ENT_QUOTES, 'UTF-8') . 'さんの登録した画像です';
+    
     $link = '<a href="logout.php">ログアウト</a>';
 } else {//ログインしていない時
     $msg = 'ログインしていません';
@@ -46,6 +47,19 @@ foreach ($result as $record) {
   ";
 }
 
+$sql_2 = 'SELECT count(*) as img_count FROM images WHERE user_name=:username AND deleted_at IS NULL';
+
+$stmt_2 = $pdo->prepare($sql_2);
+$stmt_2->bindValue(':username', $username, PDO::PARAM_STR);
+
+try {
+      $status_2 = $stmt_2->execute();
+    } catch (PDOException $e) {
+       echo json_encode(["sql error" => "{$e->getMessage()}"]);
+        exit();
+    }
+
+    $count_msg = $stmt_2->fetch(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -60,7 +74,8 @@ foreach ($result as $record) {
 <body>
   <h2><?php echo $msg; ?></h2>
   <fieldset>
-    <legend>画像登録（一覧画面）</legend>
+    <legend>画像登録（一覧画面） 計 <?php print current($count_msg) ; ?>  枚</legend>
+    
     <a href="upload.php">画像アップロード</a>
     <table>
       <thead>

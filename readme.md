@@ -8,6 +8,7 @@
 
   - ユーザー登録してログインしたら、画像を保存できるサイト
   - 更新・削除機能を追加
+  - 合計枚数の表示を追加
 
 ## 工夫した点
 
@@ -23,6 +24,7 @@
   - 画像登録テーブルを一度DROP、登録日時・更新日時・削除日時のカラム追加してテーブル再作成
   - ユーザーテーブルに管理者権限を追加
   - 削除処理を論理削除に変更
+  - 合計枚数の表示を追加
 
 ## 苦戦した点
 
@@ -42,7 +44,7 @@
 
 ## やりたいこと
   - 編集画面、画像とメモの両方をinputしてないと更新されない！！どちらかだけの更新もできるよう、要修正！
-  - 管理者画面を作りたい、余力があれば
+  - 管理者画面を作りたい、余力があれば（ファイルだけ作った中身空）
   - 削除処理実行時の/images配下の画像のデータ処理をどうするか検討中
   - フレームワークを使ってみたい
 
@@ -53,3 +55,4 @@
   - MySQLの乱数　https://dev.mysql.com/doc/refman/5.6/ja/mathematical-functions.html
   - rand()　https://atsuizo.hatenadiary.jp/entry/2020/12/04/090000
   - グローバル変数　$_FILES　https://webukatu.com/wordpress/blog/20969/
+  - Warning: Array to string conversion in の対応 https://qiita.com/ryouya3948/items/00234d81d00fd0125f63

@@ -21,3 +21,4 @@
 <input type="submit" value="新規登録">
 </form>
 <p>すでに登録済みの方は<a href="login_form.php">こちら</a></p>
+<p>管理画面<a href="admin_user.php">こちら</a></p>
